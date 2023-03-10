@@ -25,7 +25,7 @@
         )
     );
 
-    MOSTRA VALDISNEY
+    //MOSTRA VALDISNEY
     echo $banco[1]["nome"]
 
 
