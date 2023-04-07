@@ -31,7 +31,7 @@
                             <td>".$row['peso']."</td>
                             <td>
                                 <a href='./alterar_produto.php?id=" . $row['id'] . "'> ✏️ </a>
-                                🗑️ 
+                                <a href='./excluir_produto.php?id=" . $row['id'] . "'> 🗑️ </a>
                             </td>
                         </tr>";
 
