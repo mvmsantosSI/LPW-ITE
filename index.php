@@ -1,25 +1,46 @@
-<?php
+<?php 
+        include("layout/topo.php");
+        include("database/database.php");   
+        $sql = '
+        SELECT 
+        *   
+        FROM produtos';  
+        $result = $con -> query($sql);  
 
-    $arquivo = file_get_contents('arquivo.csv'); 
+    ?>
+    <h1>Cadastro de Podutos</h1>
+    <br>
+    <br>
+    <a href='novo_produto.php' class="btn btn-dark">Novo Produto</a>
+    <table class="table table-hover table-dark">
+        <thead>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Preço</td>
+            <td>Quantidade</td>
+            <td>Peso</td>
+        </thead>
+        <tbody>
+            <?php 
+                while($row = $result->fetch_assoc()){
+                    echo "<tr>
+                            <td>".$row['id']."</td>
+                            <td>".$row['nome']."</td>
+                            <td>".$row['preco']."</td>
+                            <td>".$row['quantidade']."</td>
+                            <td>".$row['peso']."</td>
+                            <td>
+                                <a href='./alterar_produto.php?id=" . $row['id'] . "'> ✏️ </a>
+                                🗑️ 
+                            </td>
+                        </tr>";
 
-    $array = explode(PHP_EOL, $arquivo);
-    
-    var_dump(print_r($array, true)); 
+                }
 
-    for ($i = 0; $i< count($array); $i++)
-    {
-        $linha = explode(';',$array[$i]);
-        echo print_r($linha, true);
-        echo "<br>";
+            ?>       
 
-  
-        if($linha[0] != 'Nome' && isset($linha[1])){
-
-            echo "Meu nome é " . $linha[0];
-            echo " meu telefone é " . $linha[1];
-            echo " tenho a idade de " . $linha[2];
-            echo " e moro no estado de " . $linha[3];
-            echo "<br>";
-       }
-    }
-?>
+        </tbody>
+    </table>    
+    <?php 
+        $con->close();
+    ?>
