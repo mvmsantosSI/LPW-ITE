@@ -1,33 +1,23 @@
 <?php 
 
-    /*$local = '127.0.0.1:3307';
-    $user = 'root';
-    $pwd = '';
-    $db = 'loja';
-
-    $con = new mysqli($local, $user, $pwd, $db);
-
-    if($con->connect_error){
-        echo $con->connect_error;
-    }*/
-
-    include("database/database.php");
-    
+    $id = $_POST['id'];
     $nome = $_POST['nome'];
     $quantidade = $_POST['quantidade'];
-    $preco = $_POST['preco'];
     $peso = $_POST['peso'];
+    $preco = $_POST['preco'];
 
-    $sql = "INSERT INTO produtos
-            (nome,peso, preco, quantidade)
-            VALUES 
-            ('{$nome}',{$peso},{$preco},{$quantidade})";
-    
+    $sql = "
+        UPDATE produtos
+            SET nome ='{$nome}',
+                quantidade = {$quantidade},
+                preco = {$preco},
+                peso = {$peso}
+
+        WHERE id = {$id}
+    ";
+
+    include("database/database.php");
     $con->query($sql);
-    $con->close(); 
 
+    header("location: index.php");
 ?>
- 
-<script>
-    window.location = 'index.php';
-</script>
