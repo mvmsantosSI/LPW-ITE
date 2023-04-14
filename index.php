@@ -1,25 +1,47 @@
+<title>Cadastro de produtos</title>
 <?php
+    include("layout/topo.php");
+    include("database.php"); //faz a conexão com o banco pelo arquivo database.php
+    //require("database.php"); faz o mesmo que o include
+    $sql = 'SELECT * FROM produto';
 
-    $arquivo = file_get_contents('arquivo.csv'); 
+    $result = $con->query($sql);
+?>
 
-    $array = explode(PHP_EOL, $arquivo);
-    
-    var_dump(print_r($array, true)); 
+<h1>Cadastro de produtos</h1>
 
-    for ($i = 0; $i< count($array); $i++)
-    {
-        $linha = explode(';',$array[$i]);
-        echo print_r($linha, true);
-        echo "<br>";
+<a href="novo_produto.php" class="btn btn-info">Novo produto</a>
 
-  
-        if($linha[0] != 'Nome' && isset($linha[1])){
-
-            echo "Meu nome é " . $linha[0];
-            echo " meu telefone é " . $linha[1];
-            echo " tenho a idade de " . $linha[2];
-            echo " e moro no estado de " . $linha[3];
-            echo "<br>";
-       }
-    }
+<br>
+<br>
+<table class="table table-hover table-dark">
+    <thead>
+        <td>Id</td>
+        <td>Nome</td>
+        <td>Preço</td>
+        <td>Quantidade</td>
+        <td>Peso</td>
+    </thead>
+    <tbody>
+        <?php
+            while($row = $result->fetch_assoc()) { //pode ser fetch_array
+                echo "<tr>
+                        <td>" . $row['id'] . "</td>
+                        <td>" . $row['nome'] . "</td>
+                        <td>" . $row['preço'] . "</td>
+                        <td>" . $row['quantidade'] . "</td>
+                        <td>" . $row['peso'] . "</td>
+                        <td>
+                            <a href='/Aula08/alterar_produto.php?id=" . $row['id'] . "'> ✏️ </a>
+                            <a href='/Aula08/excluir_produto.php?id=" . $row['id'] . "'> 🗑️ </a>
+                        </td>
+                    </tr>
+                ";
+            }
+        ?>
+    </tbody>
+</table>
+<?php
+    $con->close();
+    include("layout/baixo.php");
 ?>
