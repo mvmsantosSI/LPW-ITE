@@ -32,8 +32,8 @@
                         <td>" . $row['quantidade'] . "</td>
                         <td>" . $row['peso'] . "</td>
                         <td>
-                            <a href='/Aula08/alterar_produto.php?id=" . $row['id'] . "'> ✏️ </a>
-                            <a href='/Aula08/excluir_produto.php?id=" . $row['id'] . "'> 🗑️ </a>
+                            <a href='./alterar_produto.php?id=" . $row['id'] . "'> ✏️ </a>
+                            <a href='./excluir_produto.php?id=" . $row['id'] . "'> 🗑️ </a>
                         </td>
                     </tr>
                 ";
